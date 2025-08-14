@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - LDAP Authentication Demo</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 800px; margin: 50px auto; padding: 20px; }
+        .welcome { background: #f8f9fa; padding: 20px; border-radius: 5px; margin-bottom: 20px; }
+        .nav { margin: 20px 0; }
+        .nav a { margin-right: 15px; color: #007bff; text-decoration: none; }
+        .nav a:hover { text-decoration: underline; }
+        .logout { background: #dc3545; color: white; padding: 5px 10px; text-decoration: none; border-radius: 3px; }
+    </style>
+</head>
+<body>
+    <div class="welcome">
+        <h1>Welcome to Multi-Authentication Demo</h1>
+        <div th:if="${username}">
+            <div th:if="${picture}" style="text-align: center; margin-bottom: 15px;">
+                <img th:src="${picture}" alt="Profile Picture" style="border-radius: 50%; width: 60px; height: 60px;">
+            </div>
+            <p><strong>Logged in as:</strong> <span th:text="${username}">User</span></p>
+            <p><strong>Authentication Type:</strong> <span th:text="${authType}">Auth Type</span></p>
+            <p th:if="${email}"><strong>Email:</strong> <span th:text="${email}">Email</span></p>
+            <p><strong>Authorities:</strong> <span th:text="${authorities}">Roles</span></p>
+        </div>
+        <div th:unless="${username}">
+            <p>You are not logged in. <a href="/login">Login here</a></p>
+        </div>
+    </div>
+
+    <div class="nav">
+        <h3>Navigation:</h3>
+        <a href="/">Home</a>
+        <a href="/secure">Secure Area</a>
+        <a href="/admin">Admin Dashboard</a>
+        <a href="/moderator">Moderator Panel</a>
+        <a href="/viewer">Viewer Area</a>
+        <a href="/roles">My Roles</a>
+        <a href="/hello">Hello API</a>
+        <a href="/api/users">Users API</a>
+        <a href="/h2-console" target="_blank">H2 Console</a>
+        <a href="/logout" class="logout">Logout</a>
+    </div>
+
+    <div>
+        <h3>Authentication Methods:</h3>
+        <p>This application supports multiple authentication methods:</p>
+        <ul>
+            <li><strong>File-based:</strong> Username/password from local file with role-based access</li>
+            <li><strong>Google OAuth2:</strong> Login with your Google account</li>
+            <li><strong>LDAP:</strong> Traditional directory-based authentication</li>
+        </ul>
+        <p><strong>Available Roles:</strong> Admin, Moderator, Viewer (each with different access levels)</p>
+    </div>
+</body>
+</html>

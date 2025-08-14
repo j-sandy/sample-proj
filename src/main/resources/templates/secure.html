@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Area - LDAP Authentication</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 800px; margin: 50px auto; padding: 20px; }
+        .secure { background: #d4edda; padding: 20px; border-radius: 5px; border: 1px solid #c3e6cb; }
+        .nav a { margin-right: 15px; color: #007bff; text-decoration: none; }
+        .logout { background: #dc3545; color: white; padding: 5px 10px; text-decoration: none; border-radius: 3px; }
+    </style>
+</head>
+<body>
+    <div class="secure">
+        <h1>🔒 Secure Area</h1>
+        <p>Congratulations! You have successfully authenticated.</p>
+        <div th:if="${picture}" style="text-align: center; margin-bottom: 15px;">
+            <img th:src="${picture}" alt="Profile Picture" style="border-radius: 50%; width: 60px; height: 60px;">
+        </div>
+        <p><strong>Username:</strong> <span th:text="${username}">User</span></p>
+        <p><strong>Authentication Type:</strong> <span th:text="${authType}">Auth Type</span></p>
+        <p th:if="${email}"><strong>Email:</strong> <span th:text="${email}">Email</span></p>
+        <p><strong>Authorities:</strong> <span th:text="${authorities}">Roles</span></p>
+    </div>
+
+    <div style="margin-top: 20px;">
+        <a href="/">← Back to Home</a>
+        <a href="/logout" class="logout">Logout</a>
+    </div>
+</body>
+</html>

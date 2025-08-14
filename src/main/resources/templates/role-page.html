@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${role + ' Dashboard'}">Role Dashboard</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 800px; margin: 50px auto; padding: 20px; }
+        .dashboard { background: #f8f9fa; padding: 20px; border-radius: 5px; border-left: 5px solid #007bff; }
+        .admin { border-left-color: #dc3545; }
+        .moderator { border-left-color: #ffc107; }
+        .viewer { border-left-color: #28a745; }
+        .user-info { background: white; padding: 15px; border-radius: 5px; margin: 20px 0; }
+        .nav { margin: 20px 0; }
+        .nav a { margin-right: 15px; color: #007bff; text-decoration: none; padding: 8px 12px; border: 1px solid #007bff; border-radius: 3px; }
+        .nav a:hover { background: #007bff; color: white; }
+        .logout { background: #dc3545; color: white; border-color: #dc3545; }
+        .actions { margin: 20px 0; }
+        .action-btn { display: inline-block; margin: 5px; padding: 10px 15px; background: #007bff; color: white; text-decoration: none; border-radius: 3px; }
+        .action-btn:hover { background: #0056b3; }
+    </style>
+</head>
+<body>
+    <div class="dashboard" th:classappend="${role.toLowerCase()}">
+        <h1>🔐 <span th:text="${role}">Role</span> Dashboard</h1>
+        <p th:text="${message}">Welcome message</p>
+        
+        <div class="user-info">
+            <h3>User Information</h3>
+            <p><strong>Username:</strong> <span th:text="${username}">User</span></p>
+            <p><strong>Authorities:</strong> <span th:text="${authorities}">Roles</span></p>
+        </div>
+
+        <div class="actions">
+            <h3>Available Actions</h3>
+            <div th:if="${role == 'ADMIN'}">
+                <a href="/admin/api" class="action-btn">Admin API</a>
+                <a href="/moderator" class="action-btn">Moderator Panel</a>
+                <a href="/viewer" class="action-btn">Viewer Area</a>
+                <a href="/api/users" class="action-btn">User Management</a>
+            </div>
+            <div th:if="${role == 'MODERATOR'}">
+                <a href="/moderator/api" class="action-btn">Moderator API</a>
+                <a href="/viewer" class="action-btn">Viewer Area</a>
+                <a href="/api/users" class="action-btn">View Users</a>
+            </div>
+            <div th:if="${role == 'VIEWER'}">
+                <a href="/viewer/api" class="action-btn">Viewer API</a>
+                <a href="/api/users" class="action-btn">View Users</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="nav">
+        <h3>Navigation:</h3>
+        <a href="/">Home</a>
+        <a href="/secure">Secure Area</a>
+        <a href="/roles">My Roles</a>
+        <a href="/h2-console" target="_blank">H2 Console</a>
+        <a href="/logout" class="logout">Logout</a>
+    </div>
+
+    <div>
+        <h3>Role Access Information:</h3>
+        <ul>
+            <li><strong>Admin:</strong> Full access to all areas and management functions</li>
+            <li><strong>Moderator:</strong> Content management and user oversight</li>
+            <li><strong>Viewer:</strong> Read-only access to content and data</li>
+        </ul>
+    </div>
+</body>
+</html>

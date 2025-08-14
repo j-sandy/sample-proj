@@ -1,0 +1,7 @@
+# Ignore test configuration files with test credentials
+src/test/resources/application-test.properties
+target/test-classes/application-test.properties
+
+# Ignore deprecated users.properties file
+src/main/resources/users.properties
+target/classes/users.properties

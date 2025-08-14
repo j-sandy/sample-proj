@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LDAP Login</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 400px; margin: 100px auto; padding: 20px; }
+        .login-form { border: 1px solid #ddd; padding: 20px; border-radius: 5px; }
+        input[type="text"], input[type="password"] { width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ddd; }
+        input[type="submit"] { background: #007bff; color: white; padding: 10px 20px; border: none; cursor: pointer; }
+        .error { color: red; margin: 10px 0; }
+    </style>
+</head>
+<body>
+    <div class="login-form">
+        <h2>Multi-Authentication System</h2>
+        
+        <!-- Google OAuth2 Login -->
+        <div style="margin-bottom: 20px; text-align: center;">
+            <a href="/oauth2/authorization/google" style="display: inline-block; background: #db4437; color: white; padding: 12px 20px; text-decoration: none; border-radius: 5px; font-weight: bold;">
+                🔍 Login with Google
+            </a>
+        </div>
+        
+        <div style="text-align: center; margin: 20px 0; color: #666;">
+            <strong>OR</strong>
+        </div>
+        
+        <!-- File-based / LDAP Form Login -->
+        <h3>Username & Password Login</h3>
+        <p style="color: #666; font-size: 14px; margin-bottom: 15px;">
+            Use file-based credentials or LDAP authentication
+        </p>
+        <form method="post" action="/login">
+            <div>
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div>
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <div>
+                <input type="submit" value="Login">
+            </div>
+            <div style="margin-top: 15px; padding: 10px; background: #e9ecef; border-radius: 3px; font-size: 12px;">
+                <strong>Test Credentials:</strong><br>
+                Admin: admin / password123<br>
+                Moderator: moderator / password123<br>
+                Viewer: viewer / password123
+            </div>
+            <div class="error" th:if="${param.error}">
+                Invalid username or password.
+            </div>
+            <div style="color: green; margin: 10px 0;" th:if="${param.logout}">
+                You have been logged out successfully.
+            </div>
+        </form>
+    </div>
+</body>
+</html>
