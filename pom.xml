@@ -110,6 +110,15 @@
             <artifactId>testcontainers</artifactId>
             <scope>test</scope>
         </dependency>
+
+        <!-- Security Fix: Override nimbus-jose-jwt to fix CVE-2025-53864 -->
+        <!-- Vulnerability: Uncontrolled recursion leading to DoS via deeply nested JSON -->
+        <!-- Fixed in: 10.0.2+, using latest stable 10.4.2 -->
+        <dependency>
+            <groupId>com.nimbusds</groupId>
+            <artifactId>nimbus-jose-jwt</artifactId>
+            <version>10.4.2</version>
+        </dependency>
     </dependencies>
 
     <build>
