@@ -14,7 +14,7 @@ A simple Spring Boot REST API project demonstrating basic CRUD operations with u
 ## Technology Stack
 
 - **Java 17**
-- **Spring Boot 3.2.1**
+- **Spring Boot 3.5.4**
 - **Spring Web** - REST API endpoints
 - **Spring Data JPA** - Data persistence
 - **H2 Database** - In-memory database for development
@@ -142,6 +142,21 @@ Key configuration properties in `application.properties`:
 - Database: H2 in-memory
 - JPA: Auto-create tables, show SQL queries
 - Logging: Debug level for application packages
+
+## Security
+
+### CVE Fixes Applied
+
+This project includes explicit security dependency overrides to address known vulnerabilities:
+
+#### CVE-2025-53864 - nimbus-jose-jwt DoS Vulnerability
+- **Issue**: Uncontrolled recursion in Connect2id Nimbus JOSE + JWT library leading to Denial of Service
+- **Affected Versions**: nimbus-jose-jwt ≤ 10.0.1 (including 9.37.3 used by Spring Security 6.5.x)
+- **Fix Applied**: Explicit dependency override to nimbus-jose-jwt 10.4.2
+- **Date Fixed**: January 2025
+- **Impact**: Prevents DoS attacks via deeply nested JSON objects in JWT processing
+
+The fix is implemented as an explicit dependency in `pom.xml` to override the vulnerable transitive dependency from Spring Security OAuth2 components.
 
 ## Next Steps
 
