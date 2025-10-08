@@ -62,6 +62,7 @@
         <dependency>
             <groupId>com.unboundid</groupId>
             <artifactId>unboundid-ldapsdk</artifactId>
+            <version>4.0.14</version>
         </dependency>
 
         <!-- Thymeleaf for templates -->
